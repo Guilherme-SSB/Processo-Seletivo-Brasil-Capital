@@ -5,11 +5,14 @@ PROJECT_PATH = 'C:/Users/guisa/Desktop/Processo-Seletivo-Brasil-Capital'
 from json.decoder import JSONDecodeError
 import os
 import json
+
+from integracao_python_sql.python_sql import atualiza_sql
 os.system('cls')
+os.chdir(PROJECT_PATH)
 
 # Coletar dados das gestoras
-# gestoras = ['dynamo', 'constellation', 'nucleo']
-gestoras = ['nucleo']
+gestoras = ['dynamo', 'constellation', 'nucleo']
+# gestoras = ['nucleo']
 
 for gestora in gestoras:
     print(f'\nObtendo dados da {gestora}')
@@ -22,7 +25,8 @@ for gestora in gestoras:
         arquivo = open(PROJECT_PATH + f'/web_scraping/rentabilidades_resultados/rentabilidades_{gestora}.json')
         try: 
             dados = json.load(arquivo)
-            print('\n\nDados adquiridos com sucesso!')
+            print('\nDados adquiridos com sucesso!')
+            atualiza_sql(gestora=gestora.capitalize(), rentabilidade_dia=dados[0]['rentabilidade_dia'].split('%')[0].replace(',', '.'))
         except JSONDecodeError:
             # Arquivo vazio -> Tenta adquirir dados, utilizando o Scrapy, a partir do site da Anbima
             print(f'\nErro ao adquirir dados pelo site da {gestora}. Tentando a partir do site da Anbima\n')
