@@ -11,6 +11,7 @@ def atualiza_sql(gestora: str, rentabilidade_dia: float):
 
     # Tentando fazer a conexão com o banco
     try: 
+        print('Estabelecendo conexão com o banco de dados')
         conexao = pyodbc.connect(dados_conexao)
         print("Conexão bem sucedida!")
         cursor = conexao.cursor()
