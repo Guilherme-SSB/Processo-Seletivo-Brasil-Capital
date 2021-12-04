@@ -3,8 +3,10 @@ import scrapy
 
 class WsdynamoSpider(scrapy.Spider):
     name = 'wsdynamo'
-    allowed_domains = ['https://www.dynamo.com.br/pt']
-    start_urls = ['http://https://www.dynamo.com.br/pt/']
+    start_urls = ['https://www.dynamo.com.br/pt']
 
     def parse(self, response):
-        pass
+        yield{
+        'rentabilidade_dia' : response.css('.fundo-1 td:nth-child(6)::text').get().replace(',', '.'),
+        'rentabilidade_ano' : response.css('.fundo-1 td:nth-child(9)').get().split()[1].replace(',', '.')
+        }
