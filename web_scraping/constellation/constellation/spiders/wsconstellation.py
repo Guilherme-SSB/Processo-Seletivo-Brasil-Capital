@@ -3,8 +3,10 @@ import scrapy
 
 class WsconstellationSpider(scrapy.Spider):
     name = 'wsconstellation'
-    allowed_domains = ['https://constellation.com.br/pra-voce/']
-    start_urls = ['http://https://constellation.com.br/pra-voce//']
+    start_urls = ['http://constellation.com.br/pra-voce/']
 
     def parse(self, response):
-        pass
+        yield{
+        'rentabilidade_dia' : response.css('tr:nth-child(1) td:nth-child(5)::text').get().replace(',', '.'),
+        'rentabilidade_ano' : response.css('tr:nth-child(1) td:nth-child(8)::text').get().replace(',', '.')
+        }

@@ -3,7 +3,7 @@ import scrapy
 
 class WsnucleoSpider(scrapy.Spider):
     name = 'wsnucleo'
-    start_urls = ['http://www.nucleocapital.com.br//']
+    start_urls = ['http://www.nucleocapital.com.br']
 
     def parse(self, response):
         yield{
