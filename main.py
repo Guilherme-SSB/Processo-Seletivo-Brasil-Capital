@@ -15,7 +15,7 @@ gestoras = ['dynamo', 'constellation', 'nucleo']
 # gestoras = ['nucleo']
 
 for gestora in gestoras:
-    print(f'\nObtendo dados da {gestora}')
+    print(f'Obtendo dados da {gestora}\n\n')
     os.chdir(f'web_scraping/{gestora}')
     try:
         # Tenta adquirir os dados, utilizando o Scrapy, a partir dos sites das gestoras
@@ -29,10 +29,10 @@ for gestora in gestoras:
             atualiza_sql(gestora=gestora.capitalize(), rentabilidade_dia=dados[0]['rentabilidade_dia'].split('%')[0].replace(',', '.'))
         except JSONDecodeError:
             # Arquivo vazio -> Tenta adquirir dados, utilizando o Scrapy, a partir do site da Anbima
-            print(f'\nErro ao adquirir dados pelo site da {gestora}. Tentando a partir do site da Anbima\n')
+            print(f'\nErro ao adquirir dados pelo site da {gestora}. Tentando a partir do site da Anbima\n\n')
 
     except:
-        raise print(f'Houve algum problema na coleta a partir do site da {gestora}')
+        raise print(f'Houve algum problema na coleta a partir do site da {gestora}\n\n')
          
 
     os.chdir(PROJECT_PATH)

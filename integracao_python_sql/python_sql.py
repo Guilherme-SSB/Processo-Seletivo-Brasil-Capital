@@ -28,7 +28,7 @@ def atualiza_sql(gestora: str, rentabilidade_dia: float):
     try: 
         cursor.execute(comando)
         cursor.commit()
-        print(f"Rentabilidade diária da {gestora} foi atualizado!\n")
+        print(f"Rentabilidade diária da {gestora} foi atualizada (SQL Server)!\n\n")
     except:
         raise print("Ocorreu um erro ao executar o comando")
 
