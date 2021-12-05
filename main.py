@@ -1,6 +1,3 @@
-# Caminho do projeto 
-PROJECT_PATH = 'C:/Users/guisa/Desktop/Processo-Seletivo-Brasil-Capital'
-
 # Importações
 import json
 import os
@@ -8,6 +5,7 @@ from json.decoder import JSONDecodeError
 
 import pandas as pd
 
+from config import PROJECT_PATH
 from integracao_python_excel.python_excel import atualiza_tabela
 from integracao_python_sql.python_sql import atualiza_sql
 from web_scraping.CVM_backup.webscraping_backup import scraping_backup

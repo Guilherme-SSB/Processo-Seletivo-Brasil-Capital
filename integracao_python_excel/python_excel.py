@@ -1,10 +1,8 @@
 def atualiza_tabela(gestora: str, rentabilidade_dia: float, rentabilidade_ano: float):
     # Importações
-    import pandas as pd
     import json
-
-    # Caminho para o projeto
-    PROJECT_PATH = 'C:/Users/guisa/Desktop/Processo-Seletivo-Brasil-Capital'
+    import pandas as pd
+    from config import PROJECT_PATH
 
     # Lendo a tabela excel
     tabela = pd.read_excel(PROJECT_PATH + '/tabela_rentabilidades.xlsx')

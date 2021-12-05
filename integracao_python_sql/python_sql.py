@@ -1,13 +1,7 @@
 def atualiza_sql(gestora: str, rentabilidade_dia: float):
     # Importações
     import pyodbc
-
-    # Dados para conexão
-    dados_conexao = (
-        "Driver={SQL Server};"
-        "Server=PC-do-Gui;"
-        "Database=BrasilCapitalDB;"
-        )
+    from config import dados_conexao
 
     # Tentando fazer a conexão com o banco
     try: 

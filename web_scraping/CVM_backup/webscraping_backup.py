@@ -1,6 +1,9 @@
 
+from config import PROJECT_PATH
+
+
 def scraping_backup(gestora: str):
-    PROJECT_PATH = 'C:/Users/guisa/Desktop/Processo-Seletivo-Brasil-Capital'
+    # PROJECT_PATH = 'C:/Users/guisa/Desktop/Processo-Seletivo-Brasil-Capital'
     print('Iniciando web scraping de backup')
 
     # Importações
