@@ -1,18 +1,19 @@
 # Caminho do projeto 
 PROJECT_PATH = 'C:/Users/guisa/Desktop/Processo-Seletivo-Brasil-Capital'
-#TODO Criar spider para o backup constellation: scrapy genspider constellation2 site.com
+#TODO Problema com a constellation
 # Importações
 from json.decoder import JSONDecodeError
 import os
 import json
 
 from integracao_python_sql.python_sql import atualiza_sql
+from web_scraping.CVM_backup.webscraping_backup import scraping_backup
 os.system('cls')
 os.chdir(PROJECT_PATH)
 
 # Coletar dados das gestoras
-gestoras = ['dynamo', 'constellation', 'nucleo']
-# gestoras = ['nucleo']
+# gestoras = ['dynamo', 'constellation', 'nucleo']
+gestoras = ['constellation']
 
 for gestora in gestoras:
     print(f'Obtendo dados da {gestora}\n\n')
@@ -29,7 +30,10 @@ for gestora in gestoras:
             atualiza_sql(gestora=gestora.capitalize(), rentabilidade_dia=dados[0]['rentabilidade_dia'].split('%')[0].replace(',', '.'))
         except JSONDecodeError:
             # Arquivo vazio -> Tenta adquirir dados, utilizando o Scrapy, a partir do site da Anbima
-            print(f'\nErro ao adquirir dados pelo site da {gestora}. Tentando a partir do site da Anbima\n\n')
+            print(f'\nErro ao adquirir dados pelo site da {gestora}. Tentando a partir do site da CVM\n\n')
+            scraping_backup(gestora=gestora)
+            dados = json.load(arquivo)
+            atualiza_sql(gestora=gestora.capitalize(), rentabilidade_dia=dados[0]['rentabilidade_dia'].split('%')[0].replace(',', '.'))
 
     except:
         raise print(f'Houve algum problema na coleta a partir do site da {gestora}\n\n')
