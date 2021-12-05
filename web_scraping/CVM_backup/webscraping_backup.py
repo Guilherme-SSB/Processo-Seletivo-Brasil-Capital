@@ -1,7 +1,7 @@
 
 def scraping_backup(gestora: str):
     PROJECT_PATH = 'C:/Users/guisa/Desktop/Processo-Seletivo-Brasil-Capital'
-    print('Iniciando web scraping')
+    print('Iniciando web scraping de backup')
 
     # Importações
     import pandas as pd
