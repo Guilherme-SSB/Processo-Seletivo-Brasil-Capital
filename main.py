@@ -14,7 +14,8 @@ os.system('cls')
 os.chdir(PROJECT_PATH)
 
 # Coletar dados das gestoras
-gestoras = ['dynamo', 'constellation', 'nucleo']
+# gestoras = ['dynamo', 'constellation', 'nucleo']
+gestoras = ['constellation']
 
 for gestora in gestoras:
     print(f'Obtendo dados da {gestora}\n\n')

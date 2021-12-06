@@ -1,14 +1,11 @@
-
-from config import PROJECT_PATH
-
-
 def scraping_backup(gestora: str):
-    # PROJECT_PATH = 'C:/Users/guisa/Desktop/Processo-Seletivo-Brasil-Capital'
     print('Iniciando web scraping de backup')
 
     # Importações
     import pandas as pd
     import json
+    from config import PROJECT_PATH
+    import datetime
 
     # Definições de funções de aquisicão dos dados
     def busca_informes_cvm(ano, mes):
@@ -19,8 +16,13 @@ def scraping_backup(gestora: str):
         url = "http://dados.cvm.gov.br/dados/FI/CAD/DADOS/cad_fi.csv"
         return pd.read_csv(url, sep=';', encoding='ISO-8859-1')
 
-    # Obtendo dados dos fundos de dezembro de 2021
-    informes_diarios = busca_informes_cvm(2021, 12)
+    # Obtendo dados dos fundos do mês e ano atual
+    currentDateTime = datetime.datetime.now()
+    date = currentDateTime.date()
+    mes = int(date.strftime("%m"))
+    ano = int(date.strftime("%Y"))
+    print(mes, ano)
+    informes_diarios = busca_informes_cvm(ano, mes)
 
     # Apenas me interessa os seguintes fundos das gestoras:
     ## CONSTELLATION MASTER FUNDO DE INVESTIMENTO DE AÇÕES -> CNPF: 11.225.860/0001-40
