@@ -78,3 +78,11 @@ Para criar um banco de dados para armazenar as informações de rentabilidade di
 
 Tendo criado a tabela no SQL Server, foi utilizado a biblioteca pyodbc para se conectar ao banco e executar queries. No arquivo *python_sql.py* está sendo feito a conexão com o banco e a execução de comandos ``UPDATE CotasDiarias SET rentabilidade_dia={} WHERE gestora='{}'``, para atualizar os valores da tabela. Os dados que serão armazenados são aqueles fornecidos em arquivos JSON, pelo webscraping.
 
+# Observação
+
+Ao coletar os dados de rentabilidade anual dos fundos, para a etapa 2, eu encontrei problemas tanto para o site da Anbima quanto para o CVM. 
+Minha primeira tentativa foi no site da CVM (onde, a partir dos informes diários, foi obtido a rentabilidade diária dos fundos), contudo eu não consegui encontrar os dados de rentabilidades anuais, pelo menos não para todos os fundos: a Constellation possui uma página (pdf) chamado "Lâmina de Fundo", que possui as informações de rentabilidades, porém as demais gestoras não possuem essa página. 
+
+Dessa forma, fui para a abordagem a partir do site da Anbima. Tentei realizar o web scraping utilizando a biblioteca *Scrapy* e a *requests* em conjunto com a *BeautifulSoup*, contudo ambas abordagens não conseguiam retornar os valores desejados. Então, fui em busca da API da Anbima. Fiz o cadastro para ter acesso a API porém fui impedido de continuar esse método pois a conta gratuita, que eu criei, apenas possuia acesso ao ambiente SandBox da API, que funciona apenas para testes, impossibilitando o acesso a informações de qualquer fundo. Erro esse está mostrado [nesse notebook Python](https://colab.research.google.com/drive/1wqlK6HhhPk4s95g7uET8DFCbvuxyUp2r?usp=sharing).
+
+Então, tendo falhado todas as minhas tentativas, não consegui realizar a coleta das rentabilidades anuais por meio de outro site, além dos oficiais das gestoras.
