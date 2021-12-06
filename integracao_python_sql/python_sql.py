@@ -1,4 +1,7 @@
 def atualiza_sql(gestora: str, rentabilidade_dia: float):
+    """Dado a gestora e o valor de rentabilidade diária adquirida, 
+    realiza uma query de UPDATE ao banco de dados em SQL Server"""
+
     # Importações
     import pyodbc
     from config import dados_conexao

@@ -1,4 +1,6 @@
 def atualiza_tabela(gestora: str, rentabilidade_dia: float, rentabilidade_ano: float):
+    """Dado a gestora, o valor de rentabilidade diária e a rentabilidade anual adquirida, 
+    atualiza uma tabela Excel com essas informações"""
     # Importações
     import json
     import pandas as pd

@@ -14,26 +14,30 @@ os.system('cls')
 os.chdir(PROJECT_PATH)
 
 # Coletar dados das gestoras
-# gestoras = ['dynamo', 'constellation', 'nucleo']
-gestoras = ['constellation']
+gestoras = ['dynamo', 'constellation', 'nucleo']
 
+# Para cada gestora na lista das gestoras, faça o web scraping, atualize o SQL Server e a tabela Excel
 for gestora in gestoras:
     print(f'Obtendo dados da {gestora}\n\n')
     os.chdir(f'web_scraping/{gestora}')
+    # Tenta adquirir os dados, utilizando o Scrapy, a partir dos sites das gestoras
     try:
-        # Tenta adquirir os dados, utilizando o Scrapy, a partir dos sites das gestoras
         os.system(f'scrapy crawl ws{gestora} -O ../rentabilidades_resultados/rentabilidades_{gestora}.json')
         
         # Verifica se os arquivos JSON não estão vazios
         arquivo = open(PROJECT_PATH + f'/web_scraping/rentabilidades_resultados/rentabilidades_{gestora}.json')
+
+        
+        # Tenta carregar os dados gerados. 
         try: 
+            # Se for possível, atualiza o SQL Server e a tabela Excel
             dados = json.load(arquivo)
             print('\nDados adquiridos com sucesso!')
             atualiza_sql(gestora=gestora.capitalize(), rentabilidade_dia=dados[0]['rentabilidade_dia'].split('%')[0].replace(',', '.'))
             atualiza_tabela(gestora=gestora, rentabilidade_dia=dados[0]['rentabilidade_dia'].split('%')[0].replace(',', '.'), rentabilidade_ano=dados[0]['rentabilidade_ano'].split('%')[0].replace(',', '.')
 )
         except JSONDecodeError:
-            # Arquivo vazio -> Tenta adquirir dados, utilizando o Scrapy, a partir do site da CVM
+            # Se houver algum erro (arquivo vazio), tenta coletar os dados a partir do site da CVM
             print(f'\nErro ao adquirir dados pelo site da {gestora}. Tentando a partir do site da CVM\n\n')
             scraping_backup(gestora=gestora)
             dados = json.load(arquivo)
