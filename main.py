@@ -23,30 +23,35 @@ for gestora in gestoras:
     # Tenta adquirir os dados, utilizando o Scrapy, a partir dos sites das gestoras
     try:
         os.system(f'scrapy crawl ws{gestora} -O ../rentabilidades_resultados/rentabilidades_{gestora}.json')
-        
+
         # Verifica se os arquivos JSON não estão vazios
         arquivo = open(PROJECT_PATH + f'/web_scraping/rentabilidades_resultados/rentabilidades_{gestora}.json')
 
-        
-        # Tenta carregar os dados gerados. 
-        try: 
+        # Tenta carregar os dados gerados.
+        try:
             # Se for possível, atualiza o SQL Server e a tabela Excel
             dados = json.load(arquivo)
             print('\nDados adquiridos com sucesso!')
-            atualiza_sql(gestora=gestora.capitalize(), rentabilidade_dia=dados[0]['rentabilidade_dia'].split('%')[0].replace(',', '.'))
-            atualiza_tabela(gestora=gestora, rentabilidade_dia=dados[0]['rentabilidade_dia'].split('%')[0].replace(',', '.'), rentabilidade_ano=dados[0]['rentabilidade_ano'].split('%')[0].replace(',', '.')
-)
+            atualiza_sql(gestora=gestora.capitalize(),
+                         rentabilidade_dia=dados[0]['rentabilidade_dia'].split('%')[0].replace(',', '.'))
+            atualiza_tabela(gestora=gestora,
+                            rentabilidade_dia=dados[0]['rentabilidade_dia'].split('%')[0].replace('.', ','),
+                            rentabilidade_ano=dados[0]['rentabilidade_ano'].split('%')[0].replace('.', ',')
+                            )
         except JSONDecodeError:
             # Se houver algum erro (arquivo vazio), tenta coletar os dados a partir do site da CVM
             print(f'\nErro ao adquirir dados pelo site da {gestora}. Tentando a partir do site da CVM\n\n')
             scraping_backup(gestora=gestora)
             dados = json.load(arquivo)
-            atualiza_sql(gestora=gestora.capitalize(), rentabilidade_dia=dados['rentabilidade_dia'].split('%')[0].replace(',', '.'))
-            atualiza_tabela(gestora=gestora, rentabilidade_dia=dados['rentabilidade_dia'].split('%')[0].replace(',', '.'), rentabilidade_ano=None)
+            atualiza_sql(gestora=gestora.capitalize(),
+                         rentabilidade_dia=dados['rentabilidade_dia'].split('%')[0].replace(',', '.'))
+            atualiza_tabela(gestora=gestora,
+                            rentabilidade_dia=dados['rentabilidade_dia'].split('%')[0].replace('.', ','),
+                            rentabilidade_ano=None)
 
     except:
         raise print(f'Houve algum problema na coleta a partir do site da {gestora}\n\n')
-         
+
     os.chdir(PROJECT_PATH)
 
 # Mostrando tabela de resultados    

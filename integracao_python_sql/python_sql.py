@@ -5,9 +5,10 @@ def atualiza_sql(gestora: str, rentabilidade_dia: float):
     # Importações
     import pyodbc
     from config import dados_conexao
+    import sys
 
     # Tentando fazer a conexão com o banco
-    try: 
+    try:
         print('Estabelecendo conexão com o banco de dados')
         conexao = pyodbc.connect(dados_conexao)
         print("Conexão bem sucedida!")
@@ -17,12 +18,12 @@ def atualiza_sql(gestora: str, rentabilidade_dia: float):
 
     # Comando SQL a ser executado
     comando = f"""
-            UPDATE CotasDiarias 
+            UPDATE Rentabilidades 
             SET rentabilidade_dia={rentabilidade_dia} 
             WHERE gestora='{gestora}'"""
 
     # Tentando executar o comando
-    try: 
+    try:
         cursor.execute(comando)
         cursor.commit()
         print(f"Rentabilidade diária da {gestora} foi atualizada (SQL Server)!\n\n")

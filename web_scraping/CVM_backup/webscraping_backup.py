@@ -1,5 +1,5 @@
 def scraping_backup(gestora: str):
-    "Dado a gestora, realiza a coleta de dados a partir dos informes diários da CVM."
+    """Dado a gestora, realiza a coleta de dados a partir dos informes diários da CVM."""
 
     print('Iniciando web scraping de backup')
 

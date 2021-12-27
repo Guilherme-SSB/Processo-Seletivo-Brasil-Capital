@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../.idea/Github.iml" filepath="$PROJECT_DIR$/../.idea/Github.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/Processo Seletivo Brasil Capital.iml" filepath="$PROJECT_DIR$/.idea/Processo Seletivo Brasil Capital.iml" />
+      <module fileurl="file://$USER_HOME$/Desktop/ScrapingAluraArtigo/.idea/ScrapingAluraArtigo.iml" filepath="$USER_HOME$/Desktop/ScrapingAluraArtigo/.idea/ScrapingAluraArtigo.iml" />
     </modules>
   </component>
 </project>

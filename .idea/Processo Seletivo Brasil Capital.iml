@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="PYTHON_MODULE" version="4">
   <component name="NewModuleRootManager">
-    <content url="file://$MODULE_DIR$">
-      <excludeFolder url="file://$MODULE_DIR$/virtual" />
-      <excludeFolder url="file://$MODULE_DIR$/Processo Seletivo Brasil Capital" />
-    </content>
-    <orderEntry type="jdk" jdkName="Python 3.9 (Processo Seletivo Brasil Capital) (2)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.9 (Processo Seletivo Brasil Capital)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="ScrapingAluraArtigo" />
+    <orderEntry type="module" module-name="Github" />
   </component>
 </module>
