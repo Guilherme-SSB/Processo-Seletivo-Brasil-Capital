@@ -14,7 +14,7 @@ os.system('cls')
 os.chdir(PROJECT_PATH)
 
 # Coletar dados das gestoras
-gestoras = ['dynamo', 'constellation', 'nucleo']
+gestoras = ['dynamo', 'nucleo', 'constellation']
 
 # Para cada gestora na lista das gestoras, faça o web scraping, atualize o SQL Server e a tabela Excel
 for gestora in gestoras:
@@ -22,7 +22,11 @@ for gestora in gestoras:
     os.chdir(f'web_scraping/{gestora}')
     # Tenta adquirir os dados, utilizando o Scrapy, a partir dos sites das gestoras
     try:
-        os.system(f'scrapy crawl ws{gestora} -O ../rentabilidades_resultados/rentabilidades_{gestora}.json')
+        if (gestora == 'dynamo') or (gestora == 'nucleo'):
+            os.system(f'scrapy crawl ws{gestora} -O ../rentabilidades_resultados/rentabilidades_{gestora}.json')
+
+        if gestora == 'constellation':
+            os.system('python webscraping_constellation.py')
 
         # Verifica se os arquivos JSON não estão vazios
         arquivo = open(PROJECT_PATH + f'/web_scraping/rentabilidades_resultados/rentabilidades_{gestora}.json')
@@ -54,6 +58,6 @@ for gestora in gestoras:
 
     os.chdir(PROJECT_PATH)
 
-# Mostrando tabela de resultados    
+# Mostrando tabela de resultados
 tabela = pd.read_excel(PROJECT_PATH + '/tabela_rentabilidades.xlsx')
 print(tabela.head())
